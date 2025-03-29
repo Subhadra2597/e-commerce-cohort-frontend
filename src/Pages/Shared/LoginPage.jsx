@@ -14,14 +14,14 @@ export const LoginPage = ({role}) => {
 
     const user={
         role:"user",
-        loginAPI:"/user/login",
+        loginAPI:"/user/user-login",
         profileRoute:"/user/profile",
         signUpRoute:"/user/signup"
 
     }
     if(role=="seller"){
         user.role="seller",
-        user.loginAPI = "/seller/login",
+        user.loginAPI = "/seller/seller-login",
         user.profileRoute = "/seller/profile",
         user.signUpRoute = "/seller/signup"
     }
