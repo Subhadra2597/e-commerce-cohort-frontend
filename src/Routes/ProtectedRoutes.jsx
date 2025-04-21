@@ -7,11 +7,12 @@ import { Outlet } from 'react-router-dom'
 export const ProtectedRoutes = () => {
    const { isUserAuth } = useSelector((state) => state.user);
     const navigate=useNavigate()
- useEffect(()=>{
+    
+   //  useEffect(()=>{
      
      if(!isUserAuth){
-        navigate("login")
+        navigate("/login")
      }
- },[])
+//  },[])
         return <Outlet />
 }

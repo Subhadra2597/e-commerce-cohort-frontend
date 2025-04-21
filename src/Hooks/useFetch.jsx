@@ -4,9 +4,9 @@ import { axiosInstance } from '../config/axiosInstance'
 
 export let useFetch = (url) => {
 
-    const[data,setData]=useState([])
+    const[data,setData]=useState({})
       const[isLoading,setIsLoading]=useState(true)
-      const[error,setError]=('')
+      const[error,setError]=useState('')
       
 const fetchData=async ()=>{
 
@@ -18,7 +18,7 @@ const fetchData=async ()=>{
     console.log(data,"=====products")
     
   } catch (error) {
-    console.log(error)
+    console.log(error,'======error message from usefetch')
     setError(error)
     
   }

@@ -18,9 +18,9 @@ const navigate = useNavigate()
                             {" "}
                             <li>Home</li>{" "}
                         </Link>
-                        <Link to={"/about"}>
+                        <Link to={"/login"}>
                             {" "}
-                            <li>About</li>{" "}
+                            <li>Login</li>{" "}
                         </Link>
                         <Link to={"/products"}>
                             {" "}

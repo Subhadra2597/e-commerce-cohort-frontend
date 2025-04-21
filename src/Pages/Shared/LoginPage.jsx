@@ -4,7 +4,8 @@ import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import { saveUser,clearUser } from '../../Redux/features/userSlice';
-
+import { saveSeller,clearSeller } from '../../Redux/features/sellerSlice';
+import { saveAdmin,clearAdmin } from '../../Redux/features/adminSlice';
 export const LoginPage = ({role}) => {
 
     const { register, handleSubmit } = useForm()
@@ -13,18 +14,25 @@ export const LoginPage = ({role}) => {
     
 
     const user={
-        role:"user",
+        role:"User",
         loginAPI:"/user/user-login",
         profileRoute:"/user/profile",
-        signUpRoute:"/user/signup"
+        signUpRoute:"/signup"
 
     }
-    if(role=="seller"){
-        user.role="seller",
+    if(role=="Seller"){
+        user.role="Seller",
         user.loginAPI = "/seller/seller-login",
         user.profileRoute = "/seller/profile",
         user.signUpRoute = "/seller/signup"
     }
+    if(role=="admin"){
+        user.role="admin",
+        user.loginAPI = "/admin/admin-login",
+        user.profileRoute = "/admin/profile",
+        user.signUpRoute = "/admin/signup"
+    }
+
     const onSubmit=async (data)=>{
         try {
             
@@ -35,10 +43,14 @@ export const LoginPage = ({role}) => {
                 })
             console.log(data)
             console.log(response,"======response")
-            dispatch(saveUser(response?.data?.data))
-            navigate("/user/profile")
+        if(role=="User")  dispatch(saveUser(response?.data?.data))
+        if(role=="Seller")dispatch(saveSeller(response?.data?.data))
+        if(role=="Admin")dispatch(saveAdmin(response?.data?.data))
+            navigate(user.profileRoute)
         } catch (error) {
-            dispatch(clearUser())
+            if(role=="User")  dispatch(clearUser())
+                if(role=="Seller")dispatch(clearSeller())
+                if(role=="Admin")dispatch(clearAdmin())
             console.log(error)
         }
     }
@@ -75,11 +87,9 @@ export const LoginPage = ({role}) => {
 
                            
                             <div className="flex justify-between items-center">
+                                
                                 <label className="label">
-                                    <Link>Forgot password?</Link>
-                                </label>
-                                <label className="label">
-                                    <Link to={user.signupRoute}>New User?</Link>
+                                    <Link to={user.signUpRoute}>New User?</Link>
                                 </label>
                             </div>
                         </div>
